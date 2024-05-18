@@ -11,7 +11,9 @@ public class Problem44 {
      * @return 5 이상 10 이하를 제외한 숫자들의 합
      */
     public static int sumExcludingRange(List<Integer> numbers) {
-        // 여기에 코드 작성
-        return 0;
+        return numbers.stream()
+                .filter(num -> num < 5 || num > 10)
+                .mapToInt(Integer::intValue)
+                .sum();
     }
 }

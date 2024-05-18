@@ -11,7 +11,9 @@ public class Problem32 {
      * @return 10 이상 20 이하의 숫자들의 제곱으로 이루어진 리스트
      */
     public static List<Integer> filterAndSquareNumbers(List<Integer> numbers) {
-        // 여기에 코드 작성
-        return null;
+        return numbers.stream()
+                .filter(num -> num >= 10 && num <= 20)
+                .map(num -> num * num)
+                .toList();
     }
 }

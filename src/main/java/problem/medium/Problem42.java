@@ -12,7 +12,9 @@ public class Problem42 {
      * @return 조건을 만족하는 숫자들의 합
      */
     public static int sumSpecialMultiples(List<Integer> numbers) {
-        // 여기에 코드 작성
-        return 0;
+        return numbers.stream()
+                .filter(num -> num % 3 == 0 || num % 5 == 0)
+                .mapToInt(num -> num % 5 == 0 ? num + num : num)
+                .sum();
     }
 }

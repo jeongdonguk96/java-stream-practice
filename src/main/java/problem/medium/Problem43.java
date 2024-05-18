@@ -13,7 +13,13 @@ public class Problem43 {
      * @return 조건을 만족하는 문자열 리스트
      */
     public static List<String> filterStringsByLength(List<String> strings, List<Integer> lengths) {
-        // 여기에 코드 작성
-        return null;
+        return strings.stream()
+                .flatMap(
+                        str -> lengths.stream()
+                                .filter(length -> str.length() <= length)
+                                .map(length -> str)
+                )
+                .distinct()
+                .toList();
     }
 }
