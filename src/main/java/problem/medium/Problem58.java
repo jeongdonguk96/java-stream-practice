@@ -1,6 +1,9 @@
 package problem.medium;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import problem.medium.resources.Employee;
 
 public class Problem58 {
@@ -13,7 +16,9 @@ public class Problem58 {
      * @return 최고령 직원의 이름
      */
     public static String getOldestEmployeeName(List<Employee> employees) {
-        // 여기에 코드 작성
-        return "";
+        return employees.stream()
+                .max(Comparator.comparingInt(Employee::getAge))
+                .map(Employee::getName)
+                .orElse("");
     }
 }

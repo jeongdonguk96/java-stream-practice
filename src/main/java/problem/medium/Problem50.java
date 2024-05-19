@@ -12,7 +12,9 @@ public class Problem50 {
      * @return 합이 10을 초과하는 최초의 연속된 부분 리스트
      */
     public static List<Integer> findFirstSublistWithSumOverTen(List<Integer> numbers) {
-        // 여기에 코드 작성
-        return null;
+        return numbers.stream()
+                .filter(i -> numbers.get(i) + numbers.get(i+1) + numbers.get(i+2) > 10)
+                .peek(i -> System.out.println(numbers.get(i)  + ", " + numbers.get(i+1) + ", " + numbers.get(i+2)))
+                .toList();
     }
 }

@@ -1,8 +1,13 @@
 package problem.medium;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import problem.medium.resources.Customer2;
 import problem.medium.resources.Employee;
+import problem.medium.resources.Order;
 import problem.medium.resources.Product;
 
 public class Problem60 {
@@ -20,7 +25,27 @@ public class Problem60 {
     public static double calculateTotalPriceOfElectronicsOrderedByITEmployees(List<Customer2> customers,
                                                                               List<Employee> employees,
                                                                               List<Product> products) {
-        // 여기에 코드 작성
-        return 0.0;
+        // it 부서 사람들
+        List<String> itPeople = employees.stream()
+                .filter(emp -> emp.getDepartment().equals("IT"))
+                .map(Employee::getName)
+                .toList();
+
+
+        // 전가기기 상품 가격
+        Map<String, Double> productPrices = products.stream()
+                .filter(product -> product.getName().equals("Laptop") || product.getName().equals("Smartphone"))
+                .collect(Collectors.toMap(
+                        Product::getName,
+                        Product::getPrice
+                ));
+
+        return customers.stream()
+                .filter(customer -> itPeople.contains(customer.getName())) // 구매자와 it부서 사람을 일치
+                .flatMap(customer -> customer.getOrders().stream())
+                .filter(order -> productPrices.containsKey(order.getProduct()))
+                .mapToDouble(order -> productPrices.get(order.getProduct()) * order.getQuantity())
+                .sum();
+
     }
 }

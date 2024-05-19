@@ -2,6 +2,8 @@ package problem.medium;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+
 import problem.medium.resources.Product;
 
 public class Problem59 {
@@ -14,7 +16,10 @@ public class Problem59 {
      * @return 카테고리별 제품 가격 합계를 나타내는 Map
      */
     public static Map<Character, Double> getTotalPriceByCategory(List<Product> products) {
-        // 여기에 코드 작성
-        return null;
+        return products.stream()
+                .collect(Collectors.groupingBy(
+                        arg -> arg.getName().toUpperCase().charAt(0),
+                        Collectors.summingDouble(Product::getPrice)
+                ));
     }
 }
