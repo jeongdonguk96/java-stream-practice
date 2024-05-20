@@ -2,6 +2,7 @@ package problem.hard;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Problem61 {
 
@@ -14,7 +15,22 @@ public class Problem61 {
      * @return 'key=value' 패턴의 문자열을 key와 정수 value로 변환한 Map
      */
     public static Map<String, Integer> extractKeyValuePairs(List<String> strings) {
-        // 여기에 코드 작성
-        return null;
+        return strings.stream()
+                .filter(str -> str.contains("="))
+                .map(str -> str.split("="))
+                .filter(arr -> isInteger(arr[1]))
+                .collect(Collectors.toMap(
+                        arr -> arr[0],
+                        arr -> Integer.valueOf(arr[1])
+                ));
+    }
+
+    private static boolean isInteger(String str) {
+        try {
+            Integer.valueOf(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 }
