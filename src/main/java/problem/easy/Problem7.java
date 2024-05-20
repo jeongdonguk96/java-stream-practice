@@ -1,5 +1,6 @@
 package problem.easy;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class Problem7 {
@@ -11,7 +12,8 @@ public class Problem7 {
      * @return 알파벳 순으로 정렬된 문자열 리스트
      */
     public static List<String> sortStrings(List<String> strings) {
-        // 여기에 코드 작성
-        return null;
+        return strings.stream()
+                .sorted(Comparator.naturalOrder())
+                .toList();
     }
 }
