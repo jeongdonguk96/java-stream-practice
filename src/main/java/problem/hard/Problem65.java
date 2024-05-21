@@ -12,7 +12,6 @@ public class Problem65 {
      * @return 'a' 문자를 가장 많이 포함한 문자열, 없으면 빈 문자열 반환
      */
     public static String findStringWithMostAs(List<String> strings) {
-        // 여기에 코드 작성
-        return "";
+        return null;
     }
 }
